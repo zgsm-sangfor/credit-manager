@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { viteMockServe } from 'vite-plugin-mock';
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, mode }) => ({
     plugins: [
         vue(),
         viteCompression(),
@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => ({
         tailwindcss(),
         viteMockServe({
             mockPath: 'mock',
-            enable: command === 'serve',
+            enable: command === 'serve' && mode === 'mock',
             watchFiles: true,
         }),
     ],
@@ -31,22 +31,22 @@ export default defineConfig(({ command }) => ({
         host: true,
         proxy: {
             '/quota-manager': {
-                // target: 'https://costrict.sangfor.com:30443',
-                target: 'https://zgsm.sangfor.com',
+                target: 'https://zgsmtest.cn:30443/',
+                // target: 'https://zgsm.sangfor.com',
                 // target: 'http://10.48.19.1:8099',
                 changeOrigin: true,
                 secure: false,
             },
             '/oidc-auth': {
-                // target: 'https://costrict.sangfor.com:30443',
-                target: 'https://zgsm.sangfor.com',
+                target: 'https://zgsmtest.cn:30443/',
+                // target: 'https://zgsm.sangfor.com',
                 // target: 'http://10.48.19.11:8080',
                 changeOrigin: true,
                 secure: false,
             },
             '/quota-order-manager': {
-                // target: 'https://costrict.sangfor.com:30443',
-                target: 'https://zgsm.sangfor.com',
+                target: 'https://zgsmtest.cn:30443/',
+                // target: 'https://zgsm.sangfor.com',
                 // target: 'http://10.48.19.11:8080',
                 changeOrigin: true,
                 secure: false,
